@@ -81,3 +81,29 @@ button:hover {
   gap: 20px;
   text-align: center;
 }
+
+/* Intro section*/
+#tic-gameboard {
+  height: 300px;
+  width: 300px;
+  background-color: rgb(49, 81, 81);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#tic-scoreboard {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cells {
+  height: 90px;
+  width: 90px;
+  background-color: aliceblue;
+  border: #333 solid 2px;
+}
+
+.cells:hover {
+  background-color: cornflowerblue;
+}
