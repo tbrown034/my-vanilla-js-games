@@ -1,3 +1,5 @@
+/* Elements */
+
 body {
   margin: 0;
   background-color: mintcream;
@@ -5,7 +7,6 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, sans-serif;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 header {
@@ -20,11 +21,11 @@ header {
 }
 
 main {
-  flex-grow: 1;
   display: flex;
-  align-items: center; /* Centers children vertically */
-  padding: 10px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 button {
@@ -33,9 +34,9 @@ button {
   background-color: mintcream;
   color: darkslategrey;
   font-size: large;
-  margin: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  border: #333 2px solid;
 }
 
 button:hover {
@@ -43,27 +44,48 @@ button:hover {
   color: mintcream;
 }
 
-#intro-section {
+.button-container {
   display: flex;
+  gap: 10px;
+}
+
+/* hide or display classes */
+
+.hide {
+  display: none;
+}
+
+.display {
+  display: flex;
+}
+
+/* Intro section*/
+
+#intro-section {
   flex-direction: column;
-  font-family: "Roboto", sans-serif;
-  gap: 20px;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   text-align: center;
-  padding: 30px 0;
-  margin: 0 auto; /* Center horizontally */
+  background-color: skyblue;
 }
 
 #intro-title {
-  font-size: 2.5rem;
+  font-size: xx-large;
   font-weight: bold;
-  color: #196670;
+}
+#intro-subtitle {
+  font-size: 20px;
+  max-width: 80%;
 }
 
-#intro-subtitle {
-  font-size: 1.2rem;
-  color: #333;
-  padding: 0px 20px;
-  max-width: 600px;
+/* Intro section*/
+
+#game-section {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  background-color: lightblue;
 }

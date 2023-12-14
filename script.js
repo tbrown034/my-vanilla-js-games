@@ -1,15 +1,39 @@
+import { loadTic } from "./js/tic.js";
+
+// DOM Elements
 const introSection = document.getElementById("intro-section");
 const gameSection = document.getElementById("game-section");
 const ticButton = document.getElementById("tic-button");
 const rockButton = document.getElementById("rock-button");
 const connectButton = document.getElementById("connect-button");
 
-const startGame = (gameType) => {
-  console.log("start game", gameType);
+// helper functions
+
+export const goBack = () => {
+  hideSection(gameSection);
+  showSection(introSection);
 };
 
-// event listeners
+export const showSection = (section) => {
+  section.classList.remove("hide");
+  section.classList.add("display");
+};
 
-ticButton.addEventListener("click", () => startGame("tic"));
-rockButton.addEventListener("click", () => startGame("rock"));
-connectButton.addEventListener("click", () => startGame("connect"));
+export const hideSection = (section) => {
+  section.classList.add("hide");
+  section.classList.remove("display");
+};
+
+// main functions
+const selectGameClick = (gameType) => {
+  hideSection(introSection);
+  showSection(gameSection);
+  if (gameType === "tic") {
+    loadTic();
+  }
+};
+
+// Event Listeners
+ticButton.addEventListener("click", () => selectGameClick("tic"));
+rockButton.addEventListener("click", () => selectGameClick("rock"));
+connectButton.addEventListener("click", () => selectGameClick("connect"));
