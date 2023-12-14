@@ -98,12 +98,19 @@ button:hover {
 }
 
 .cells {
-  height: 90px;
-  width: 90px;
+  height: 100px;
+  width: 100px;
   background-color: aliceblue;
   border: #333 solid 2px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+  font-weight: bold;
+  color: darkslategrey;
 }
 
 .cells:hover {
-  background-color: cornflowerblue;
+  background-color: rgb(155, 192, 192);
 }

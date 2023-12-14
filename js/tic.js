@@ -15,7 +15,42 @@ backButton.innerText = "Go Back";
 let playerWins = 0;
 let computerWins = 0;
 let ties = 0;
-let currentPlayer = "your";
+let playerTurn = true;
+let currentPlayer = "Your";
+
+const checkWinner = () => {
+  const cells = document.querySelectorAll(".cells");
+
+  // Define winning combinations as sets of indices
+  const winningCombos = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8], // Rows
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8], // Columns
+    [0, 4, 8],
+    [2, 4, 6], // Diagonals
+  ];
+
+  for (let i = 0; i < winningCombos.length; i++) {
+    const combo = winningCombos[i];
+    const a = combo[0],
+      b = combo[1],
+      c = combo[2];
+
+    if (
+      cells[a].innerText &&
+      cells[a].innerText === cells[b].innerText &&
+      cells[a].innerText === cells[c].innerText
+    ) {
+      console.log("Winner: " + cells[a].innerText);
+      return cells[a].innerText; // 'X' or 'O'
+    }
+  }
+
+  return null; // No winner
+};
 
 // main functions
 
@@ -35,8 +70,25 @@ export const loadTic = () => {
 };
 
 const makeMove = (event) => {
-  const cellIndex = event.target.dataset.index;
-  console.log("Cell clicked:", cellIndex);
+  let selectedCell = event.target;
+  if (playerTurn && selectedCell.innerText === "") {
+    selectedCell.innerText = "X";
+    playerTurn = false;
+    checkWinner();
+  }
+  setTimeout(computerTurn, 500); // Delay the computer turn for better user experience
+};
+
+const computerTurn = () => {
+  const cells = document.querySelectorAll(".cells");
+  const emptyCells = Array.from(cells).filter((cell) => cell.innerText === "");
+
+  if (emptyCells.length > 0) {
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    emptyCells[randomIndex].innerText = "O";
+    playerTurn = true; // Switch back to player turn
+    checkWinner();
+  }
 };
 
 const playTic = () => {
