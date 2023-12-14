@@ -10,7 +10,7 @@ body {
 }
 
 header {
-  font-size: x-large;
+  font-size: 35px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -26,6 +26,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0px 20px;
 }
 
 button {
@@ -59,6 +60,8 @@ button:hover {
   display: flex;
 }
 
+/* global classes */
+
 /* Intro section*/
 
 #intro-section {
@@ -67,16 +70,6 @@ button:hover {
   align-items: center;
   gap: 20px;
   text-align: center;
-  background-color: skyblue;
-}
-
-#intro-title {
-  font-size: xx-large;
-  font-weight: bold;
-}
-#intro-subtitle {
-  font-size: 20px;
-  max-width: 80%;
 }
 
 /* Intro section*/
@@ -87,5 +80,4 @@ button:hover {
   align-items: center;
   gap: 20px;
   text-align: center;
-  background-color: lightblue;
 }

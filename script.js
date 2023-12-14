@@ -1,5 +1,6 @@
 import { loadTic } from "./js/tic.js";
-
+import { loadConnect } from "./js/connect.js";
+import { loadRock } from "./js/rock.js";
 // DOM Elements
 const introSection = document.getElementById("intro-section");
 const gameSection = document.getElementById("game-section");
@@ -28,8 +29,19 @@ export const hideSection = (section) => {
 const selectGameClick = (gameType) => {
   hideSection(introSection);
   showSection(gameSection);
-  if (gameType === "tic") {
-    loadTic();
+
+  switch (gameType) {
+    case "tic":
+      loadTic();
+      break;
+    case "rock":
+      loadRock();
+      break;
+    case "connect":
+      loadConnect();
+      break;
+    default:
+      alert("Error loading game");
   }
 };
 
