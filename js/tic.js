@@ -2,14 +2,16 @@ import { showSection, hideSection, goBack } from "../script.js";
 // dom selectors
 const gameSection = document.getElementById("game-section");
 const introSection = document.getElementById("intro-section");
-const gameTitle = document.createElement("h1");
 // global elements
+const gameTitle = document.createElement("h1");
 gameTitle.innerText = "Tic Tac Toe";
 const gameSubtitle = document.createElement("h3");
 gameSubtitle.innerText =
   "Tic Tac Toe is a simple two-player game where players alternate marking spaces in a 3x3 grid with their respective symbols (commonly X and O). The winner is the first player to place three of their marks in a horizontal, vertical, or diagonal row.";
 const backButton = document.createElement("button");
 backButton.innerText = "Go Back";
+const displayTurn = document.createElement("div");
+
 // game variables
 
 let playerWins = 0;
@@ -17,6 +19,11 @@ let computerWins = 0;
 let ties = 0;
 let playerTurn = true;
 let currentPlayer = "Your";
+
+const indicateTurn = () => {
+  currentPlayer = playerTurn ? "your" : "the computer's";
+  displayTurn.innerHTML = `<p>It is now ${currentPlayer} turn.</p>`;
+};
 
 const checkWinner = () => {
   const cells = document.querySelectorAll(".cells");
@@ -48,12 +55,10 @@ const checkWinner = () => {
       return cells[a].innerText; // 'X' or 'O'
     }
   }
-
   return null; // No winner
 };
 
 // main functions
-
 export const loadTic = () => {
   gameSection.innerHTML = "";
   showSection(gameSection);
@@ -66,7 +71,6 @@ export const loadTic = () => {
   playNow.addEventListener("click", playTic);
   buttonDiv.append(playNow, backButton);
   gameSection.append(gameTitle, gameSubtitle, buttonDiv);
-  // playTic();
 };
 
 const makeMove = (event) => {
@@ -75,19 +79,20 @@ const makeMove = (event) => {
     selectedCell.innerText = "X";
     playerTurn = false;
     checkWinner();
+    indicateTurn();
   }
-  setTimeout(computerTurn, 500); // Delay the computer turn for better user experience
+  setTimeout(computerTurn, 2000);
 };
 
 const computerTurn = () => {
   const cells = document.querySelectorAll(".cells");
   const emptyCells = Array.from(cells).filter((cell) => cell.innerText === "");
-
   if (emptyCells.length > 0) {
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     emptyCells[randomIndex].innerText = "O";
-    playerTurn = true; // Switch back to player turn
+    playerTurn = true;
     checkWinner();
+    indicateTurn();
   }
 };
 
@@ -95,6 +100,7 @@ const playTic = () => {
   gameSection.innerHTML = "";
   const gameBoard = document.createElement("div");
   gameBoard.id = "tic-gameboard";
+  indicateTurn();
   for (let i = 0; i < 9; i++) {
     const cell = document.createElement("div");
     cell.classList.add("cells");
@@ -106,11 +112,9 @@ const playTic = () => {
   scoreBoard.id = "tic-scoreboard";
   scoreBoard.innerHTML = `
   <h3>ScoreBoard</h3>
+  <div>
   <div>Player Wins: ${playerWins}</div>
   <div>Computer Wins: ${computerWins}</div>
-  <div>Ties: ${ties}</div>`;
-  const displayTurn = document.createElement("div");
-  displayTurn.innerHTML = `<p>It is now ${currentPlayer} turn.</p>`;
-
+  <div>Ties: ${ties}</div></div>`;
   gameSection.append(gameTitle, scoreBoard, displayTurn, gameBoard, backButton);
 };

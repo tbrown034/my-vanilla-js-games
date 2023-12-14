@@ -94,7 +94,10 @@ button:hover {
 #tic-scoreboard {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  gap: 10px;
+  border: #333 2px solid;
+  padding: 5px 20px;
 }
 
 .cells {
