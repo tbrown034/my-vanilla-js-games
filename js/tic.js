@@ -11,6 +11,8 @@ gameSubtitle.innerText =
 const backButton = document.createElement("button");
 backButton.innerText = "Go Back";
 const displayTurn = document.createElement("div");
+const scoreBoard = document.createElement("div");
+scoreBoard.id = "tic-scoreboard";
 
 // game variables
 
@@ -20,15 +22,29 @@ let ties = 0;
 let playerTurn = true;
 let currentPlayer = "Your";
 
+// helper functions
 const indicateTurn = () => {
   currentPlayer = playerTurn ? "your" : "the computer's";
   displayTurn.innerHTML = `<p>It is now ${currentPlayer} turn.</p>`;
 };
 
+const stopGame = (message) => {
+  // Disable further moves
+  const cells = document.querySelectorAll(".cells");
+  cells.forEach((cell) => {
+    cell.removeEventListener("click", makeMove);
+    cell.id = "game-over-cells";
+  });
+
+  // Display a message (if provided)
+  if (message) {
+    const messageDiv = document.createElement("div");
+    messageDiv.textContent = message;
+    gameSection.appendChild(messageDiv);
+  }
+};
 const checkWinner = () => {
   const cells = document.querySelectorAll(".cells");
-
-  // Define winning combinations as sets of indices
   const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -41,10 +57,7 @@ const checkWinner = () => {
   ];
 
   for (let i = 0; i < winningCombos.length; i++) {
-    const combo = winningCombos[i];
-    const a = combo[0],
-      b = combo[1],
-      c = combo[2];
+    const [a, b, c] = winningCombos[i];
 
     if (
       cells[a].innerText &&
@@ -52,10 +65,50 @@ const checkWinner = () => {
       cells[a].innerText === cells[c].innerText
     ) {
       console.log("Winner: " + cells[a].innerText);
-      return cells[a].innerText; // 'X' or 'O'
+      stopGame("Winner: " + cells[a].innerText); // Stop the game and display winner
+      if (cells[a].innerText === "X") {
+        playerWins++;
+        updateScoreboard();
+      } else {
+        computerWins++;
+        updateScoreboard();
+      }
+
+      return true;
     }
   }
-  return null; // No winner
+  // Check for a tie
+  const isTie = [...cells].every((cell) => cell.innerText !== "");
+  if (isTie) {
+    stopGame("It's a tie!"); // Stop the game in case of a tie
+    ties++;
+    updateScoreboard();
+    return true;
+  }
+
+  return false; // No winner yet
+};
+
+const updateScoreboard = () => {
+  scoreBoard.innerHTML = `
+    <h3>ScoreBoard</h3>
+    <div>
+      <div>Player Wins: ${playerWins}</div>
+      <div>Computer Wins: ${computerWins}</div>
+      <div>Ties: ${ties}</div>
+    </div>`;
+};
+
+const computerTurn = () => {
+  const cells = document.querySelectorAll(".cells");
+  const emptyCells = Array.from(cells).filter((cell) => cell.innerText === "");
+  if (emptyCells.length > 0) {
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    emptyCells[randomIndex].innerText = "O";
+    playerTurn = true;
+    checkWinner();
+    indicateTurn();
+  }
 };
 
 // main functions
@@ -78,25 +131,18 @@ const makeMove = (event) => {
   if (playerTurn && selectedCell.innerText === "") {
     selectedCell.innerText = "X";
     playerTurn = false;
-    checkWinner();
-    indicateTurn();
-  }
-  setTimeout(computerTurn, 2000);
-};
-
-const computerTurn = () => {
-  const cells = document.querySelectorAll(".cells");
-  const emptyCells = Array.from(cells).filter((cell) => cell.innerText === "");
-  if (emptyCells.length > 0) {
-    const randomIndex = Math.floor(Math.random() * emptyCells.length);
-    emptyCells[randomIndex].innerText = "O";
-    playerTurn = true;
-    checkWinner();
-    indicateTurn();
+    const gameEnded = checkWinner(); // Check if the game has ended
+    if (!gameEnded) {
+      indicateTurn();
+      setTimeout(computerTurn, 2000); // Proceed to computer's turn only if game hasn't ended
+    }
   }
 };
 
 const playTic = () => {
+  playerTurn = true; // Ensure the game starts with the player's turn
+  currentPlayer = "Your"; // Reset the current player display
+  indicateTurn(); // Update turn display
   gameSection.innerHTML = "";
   const gameBoard = document.createElement("div");
   gameBoard.id = "tic-gameboard";
@@ -108,13 +154,23 @@ const playTic = () => {
     gameBoard.append(cell);
     cell.addEventListener("click", makeMove);
   }
-  const scoreBoard = document.createElement("div");
-  scoreBoard.id = "tic-scoreboard";
   scoreBoard.innerHTML = `
   <h3>ScoreBoard</h3>
   <div>
   <div>Player Wins: ${playerWins}</div>
   <div>Computer Wins: ${computerWins}</div>
   <div>Ties: ${ties}</div></div>`;
-  gameSection.append(gameTitle, scoreBoard, displayTurn, gameBoard, backButton);
+  const clearButton = document.createElement("button");
+  clearButton.innerText = "Reset";
+  clearButton.addEventListener("click", () => {
+    playTic();
+  });
+  gameSection.append(
+    gameTitle,
+    scoreBoard,
+    displayTurn,
+    gameBoard,
+    backButton,
+    clearButton
+  );
 };
