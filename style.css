@@ -133,3 +133,10 @@ button:hover {
   transition: background-color 0.3s, color 0.3s;
   border: #333 2px solid;
 }
+
+#rock-player-choices,
+#rock-computer-choices {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}

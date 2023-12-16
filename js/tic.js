@@ -5,7 +5,7 @@ const introSection = document.getElementById("intro-section");
 // global elements
 const gameTitle = document.createElement("h1");
 gameTitle.innerText = "Tic Tac Toe";
-const gameSubtitle = document.createElement("h3");
+const gameSubtitle = document.createElement("p");
 gameSubtitle.innerText =
   "Tic Tac Toe is a simple two-player game where players alternate marking spaces in a 3x3 grid with their respective symbols (commonly X and O). The winner is the first player to place three of their marks in a horizontal, vertical, or diagonal row.";
 const backButton = document.createElement("button");
