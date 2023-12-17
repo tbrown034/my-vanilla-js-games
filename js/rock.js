@@ -82,6 +82,9 @@ const getIconHTML = (choice) => {
 };
 
 const playerChoose = (choice) => {
+  document.getElementById("player-rock").disabled = true;
+  document.getElementById("player-paper").disabled = true;
+  document.getElementById("player-scissors").disabled = true;
   console.log("Player chose:", choice);
   const playerChoiceDisplay = document.createElement("p");
   playerChoiceDisplay.innerHTML = `<div><p>You has chosen ${choice}</p> <div> ${getIconHTML(
@@ -95,18 +98,20 @@ const playerChoose = (choice) => {
 };
 
 const computerChoose = () => {
-  const choices = ["Rock", "Paper", "Scissors"];
-  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-  const computerChoiceDisplay = document.createElement("p");
-  computerChoiceDisplay.innerHTML = `<div><p>The Computer has chosen ${computerChoice}</p> <div> ${getIconHTML(
-    computerChoice
-  )}</div></div>`;
-  document
-    .getElementById("rock-computer-choices")
-    .appendChild(computerChoiceDisplay);
-  console.log("Computer chose:", computerChoice);
-  decideWinner();
-  // Highlight the computer's choice and handle game result
+  setTimeout(() => {
+    // Start of the function to delay
+    const choices = ["Rock", "Paper", "Scissors"];
+    const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    const computerChoiceDisplay = document.createElement("p");
+    computerChoiceDisplay.innerHTML = `<div><p>The Computer has chosen ${computerChoice}</p> <div>${getIconHTML(
+      computerChoice
+    )}</div></div>`;
+    document
+      .getElementById("rock-computer-choices")
+      .appendChild(computerChoiceDisplay);
+    console.log("Computer chose:", computerChoice);
+    decideWinner(); // Make sure to pass necessary arguments if required
+  }, 2000); // End of the function to delay and the delay time
 };
 
 const decideWinner = () => {
@@ -137,16 +142,23 @@ const decideWinner = () => {
 };
 
 const displayWinner = (message) => {
-  const winnerDisplay = document.createElement("div");
-  winnerDisplay.innerHTML = message;
-  winnerDisplay.id = "winner-display";
-  const playAgain = document.createElement("button");
-  playAgain.innerText = "Play Again";
-  backButton.addEventListener("click", goBack);
-  const buttonDiv = document.createElement("div");
-  buttonDiv.classList.add("button-container");
-  buttonDiv.append(playAgain, backButton);
-  gameSection.insertBefore(buttonDiv, gameSection.children[1]);
+  setTimeout(() => {
+    const winnerDisplay = document.createElement("div");
+    winnerDisplay.innerHTML = message;
+    winnerDisplay.id = "winner-display";
+    const playAgainButton = document.createElement("button");
+    playAgainButton.innerText = "Play Again";
+    playAgainButton.addEventListener("click", playAgain);
+    backButton.addEventListener("click", goBack);
+    const buttonDiv = document.createElement("div");
+    buttonDiv.classList.add("button-container");
+    buttonDiv.append(playAgainButton, backButton);
+    gameSection.insertBefore(buttonDiv, gameSection.children[1]);
+    gameSection.insertBefore(winnerDisplay, gameSection.children[1]);
+  }, 2000);
+};
 
-  gameSection.insertBefore(winnerDisplay, gameSection.children[1]);
+const playAgain = () => {
+  gameSection.innerHTML = "";
+  playRock();
 };
