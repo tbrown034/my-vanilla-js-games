@@ -7,14 +7,11 @@ const introSection = document.getElementById("intro-section");
 // Global elements
 const gameTitle = document.createElement("h1");
 gameTitle.innerText = "Rock Paper Scissors";
-
 const gameSubtitle = document.createElement("p");
 gameSubtitle.innerText =
-  "Rock Paper Scissors is a hand game usually played between two people, where each player simultaneously forms one of three shapes with an outstretched hand. The possible shapes - rock (a fist), paper (a flat hand), and scissors (a fist with the index and middle fingers extended, forming a V) - have a simple set of rules for which shape defeats which.";
-
+  "Rock Paper Scissors is a hand game usually played between two people, where each player simultaneously forms one of three shapes with an outstretched hand.";
 const backButton = document.createElement("button");
 backButton.innerText = "Go Back";
-
 const scoreBoard = document.createElement("div");
 scoreBoard.id = "rock-scoreboard";
 
@@ -24,6 +21,7 @@ export const loadRock = () => {
   showSection(gameSection);
   hideSection(introSection);
   const buttonDiv = document.createElement("div");
+  buttonDiv.id = "rps-button-container";
   buttonDiv.classList.add("button-container");
   backButton.addEventListener("click", goBack);
   const playNow = document.createElement("button");
@@ -39,11 +37,8 @@ const playRock = () => {
   gameBoard.id = "rock-gameboard";
   gameBoard.innerHTML = `
     <div id="rock-player-choices">
-
       <h3>Player Choices</h3>
-      <p>Make Your Selection</p>
       <div class="button-container">
-
       <button id="player-rock"><i class="fa-solid fa-hand-back-fist"></i> Rock</button>
       <button id="player-paper"><i class="fa-solid fa-hand"></i> Paper</button>
       <button id="player-scissors"><i class="fa-solid fa-hand-scissors fa-flip-horizontal"></i> Scissors</button>
@@ -52,7 +47,6 @@ const playRock = () => {
     <div id="rock-computer-choices">
       <h3>Computer Choices</h3>
       <div class="button-container">
-
       <div id="computer-rock"><i class="fa-solid fa-hand-back-fist"></i> Rock</div>
       <div id="computer-paper"><i class="fa-solid fa-hand"></i> Paper</div>
       <div id="computer-scissors"><i class="fa-solid fa-hand-scissors"></i> Scissors</div>
@@ -65,19 +59,34 @@ const playRock = () => {
   // Add event listeners to player choices
   document
     .getElementById("player-rock")
-    .addEventListener("click", () => playerChoose("rock"));
+    .addEventListener("click", () => playerChoose("Rock"));
   document
     .getElementById("player-paper")
-    .addEventListener("click", () => playerChoose("paper"));
+    .addEventListener("click", () => playerChoose("Paper"));
   document
     .getElementById("player-scissors")
-    .addEventListener("click", () => playerChoose("scissors"));
+    .addEventListener("click", () => playerChoose("Scissors"));
+};
+
+const getIconHTML = (choice) => {
+  switch (choice) {
+    case "Rock":
+      return '<i class="fa-solid fa-hand-back-fist"></i>';
+    case "Paper":
+      return '<i class="fa-solid fa-hand"></i>';
+    case "Scissors":
+      return '<i class="fa-solid fa-hand-scissors"></i>';
+    default:
+      return "";
+  }
 };
 
 const playerChoose = (choice) => {
   console.log("Player chose:", choice);
   const playerChoiceDisplay = document.createElement("p");
-  playerChoiceDisplay.innerHTML = `You Have Chosen ${choice}`;
+  playerChoiceDisplay.innerHTML = `<div><p>You has chosen ${choice}</p> <div> ${getIconHTML(
+    choice
+  )}</div></div>`;
   document
     .getElementById("rock-player-choices")
     .appendChild(playerChoiceDisplay);
@@ -86,10 +95,12 @@ const playerChoose = (choice) => {
 };
 
 const computerChoose = () => {
-  const choices = ["rock", "paper", "scissors"];
+  const choices = ["Rock", "Paper", "Scissors"];
   const computerChoice = choices[Math.floor(Math.random() * choices.length)];
   const computerChoiceDisplay = document.createElement("p");
-  computerChoiceDisplay.innerHTML = `The Computer has Chosen ${computerChoice}`;
+  computerChoiceDisplay.innerHTML = `<div><p>The Computer has chosen ${computerChoice}</p> <div> ${getIconHTML(
+    computerChoice
+  )}</div></div>`;
   document
     .getElementById("rock-computer-choices")
     .appendChild(computerChoiceDisplay);
@@ -101,26 +112,41 @@ const computerChoose = () => {
 const decideWinner = () => {
   const playerChoice = document
     .getElementById("rock-player-choices")
-    .lastChild.innerHTML.split(" ")[3];
+    .lastChild.textContent.trim()
+    .split(" ")[3];
   const computerChoice = document
     .getElementById("rock-computer-choices")
-    .lastChild.innerHTML.split(" ")[4];
+    .lastChild.textContent.trim()
+    .split(" ")[4];
+
+  let resultMessage;
 
   if (playerChoice === computerChoice) {
-    displayWinner("It's a tie!");
+    resultMessage = "It's a tie!";
   } else if (
-    (playerChoice === "rock" && computerChoice === "scissors") ||
-    (playerChoice === "scissors" && computerChoice === "paper") ||
-    (playerChoice === "paper" && computerChoice === "rock")
+    (playerChoice === "Rock" && computerChoice === "Scissors") ||
+    (playerChoice === "Scissors" && computerChoice === "Paper") ||
+    (playerChoice === "Paper" && computerChoice === "Rock")
   ) {
-    displayWinner("Player wins!");
+    resultMessage = `Player Wins! ${playerChoice} defeats ${computerChoice}.`;
   } else {
-    displayWinner("Computer wins!");
+    resultMessage = `Computer Wins! ${computerChoice} defeats ${playerChoice}.`;
   }
+
+  displayWinner(resultMessage);
 };
 
-const displayWinner = (winner) => {
-  const winnerDisplay = document.createElement("p");
-  winnerDisplay.innerHTML = winner;
-  document.getElementById("rock-gameboard").appendChild(winnerDisplay);
+const displayWinner = (message) => {
+  const winnerDisplay = document.createElement("div");
+  winnerDisplay.innerHTML = message;
+  winnerDisplay.id = "winner-display";
+  const playAgain = document.createElement("button");
+  playAgain.innerText = "Play Again";
+  backButton.addEventListener("click", goBack);
+  const buttonDiv = document.createElement("div");
+  buttonDiv.classList.add("button-container");
+  buttonDiv.append(playAgain, backButton);
+  gameSection.insertBefore(buttonDiv, gameSection.children[1]);
+
+  gameSection.insertBefore(winnerDisplay, gameSection.children[1]);
 };
