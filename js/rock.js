@@ -4,6 +4,12 @@ import { showSection, hideSection, goBack } from "../script.js";
 const gameSection = document.getElementById("game-section");
 const introSection = document.getElementById("intro-section");
 
+// game variables
+
+let playerWins = 0;
+let computerWins = 0;
+let ties = 0;
+
 // Global elements
 const gameTitle = document.createElement("h1");
 gameTitle.innerText = "Rock Paper Scissors";
@@ -11,9 +17,10 @@ const gameSubtitle = document.createElement("p");
 gameSubtitle.innerText =
   "Rock Paper Scissors is a hand game usually played between two people, where each player simultaneously forms one of three shapes with an outstretched hand.";
 const backButton = document.createElement("button");
-backButton.innerText = "Go Back";
+backButton.innerText = "Main Menu";
 const scoreBoard = document.createElement("div");
 scoreBoard.id = "rock-scoreboard";
+const turnMessage = document.createElement("div");
 
 // Main functions
 export const loadRock = () => {
@@ -53,8 +60,17 @@ const playRock = () => {
       </div>
     </div>
   `;
+  scoreBoard.innerHTML = `
+  <h3>ScoreBoard</h3>
+  <div id="scoreboard-info">
+    <div>Player Wins: ${playerWins}</div>
+    <div>Computer Wins: ${computerWins}</div>
+    <div>Ties: ${ties}</div>
+  </div>`;
+  const turnMessage = document.createElement("div");
+  turnMessage.innerText = "It is now your turn.";
 
-  gameSection.append(gameTitle, gameBoard, backButton);
+  gameSection.append(gameTitle, scoreBoard, backButton, turnMessage, gameBoard);
 
   // Add event listeners to player choices
   document
@@ -93,6 +109,7 @@ const playerChoose = (choice) => {
   document
     .getElementById("rock-player-choices")
     .appendChild(playerChoiceDisplay);
+  turnMessage.innerHTML = "";
   computerChoose();
   // Further logic for the game can be added here
 };
@@ -111,10 +128,11 @@ const computerChoose = () => {
       .appendChild(computerChoiceDisplay);
     console.log("Computer chose:", computerChoice);
     decideWinner(); // Make sure to pass necessary arguments if required
-  }, 2000); // End of the function to delay and the delay time
+  }, 500); // End of the function to delay and the delay time
 };
 
 const decideWinner = () => {
+  document.getElementById("player-rock").classList.add = "inactive-button";
   const playerChoice = document
     .getElementById("rock-player-choices")
     .lastChild.textContent.trim()
@@ -128,14 +146,17 @@ const decideWinner = () => {
 
   if (playerChoice === computerChoice) {
     resultMessage = "It's a tie!";
+    ties++;
   } else if (
     (playerChoice === "Rock" && computerChoice === "Scissors") ||
     (playerChoice === "Scissors" && computerChoice === "Paper") ||
     (playerChoice === "Paper" && computerChoice === "Rock")
   ) {
     resultMessage = `Player Wins! ${playerChoice} defeats ${computerChoice}.`;
+    playerWins++;
   } else {
     resultMessage = `Computer Wins! ${computerChoice} defeats ${playerChoice}.`;
+    computerWins++;
   }
 
   displayWinner(resultMessage);
@@ -143,6 +164,7 @@ const decideWinner = () => {
 
 const displayWinner = (message) => {
   setTimeout(() => {
+    updateScoreboard();
     const winnerDisplay = document.createElement("div");
     winnerDisplay.innerHTML = message;
     winnerDisplay.id = "winner-display";
@@ -153,12 +175,22 @@ const displayWinner = (message) => {
     const buttonDiv = document.createElement("div");
     buttonDiv.classList.add("button-container");
     buttonDiv.append(playAgainButton, backButton);
-    gameSection.insertBefore(buttonDiv, gameSection.children[1]);
-    gameSection.insertBefore(winnerDisplay, gameSection.children[1]);
-  }, 2000);
+    gameSection.insertBefore(buttonDiv, gameSection.children[2]);
+    gameSection.insertBefore(winnerDisplay, gameSection.children[2]);
+  }, 500);
 };
 
 const playAgain = () => {
   gameSection.innerHTML = "";
   playRock();
+};
+
+const updateScoreboard = () => {
+  scoreBoard.innerHTML = `
+    <h3>ScoreBoard</h3>
+    <div id="scoreboard-info">
+      <div>Player Wins: ${playerWins}</div>
+      <div>Computer Wins: ${computerWins}</div>
+      <div>Ties: ${ties}</div>
+    </div>`;
 };

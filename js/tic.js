@@ -9,7 +9,7 @@ const gameSubtitle = document.createElement("p");
 gameSubtitle.innerText =
   "Tic Tac Toe is a simple two-player game where players alternate marking spaces in a 3x3 grid with their respective symbols. The winner is the first player to place three of their marks in a horizontal, vertical or diagonal row.";
 const backButton = document.createElement("button");
-backButton.innerText = "Go Back";
+backButton.innerText = "Main Menu";
 const displayTurn = document.createElement("div");
 const scoreBoard = document.createElement("div");
 scoreBoard.id = "tic-scoreboard";
@@ -28,20 +28,34 @@ const indicateTurn = () => {
   displayTurn.innerHTML = `<p>It is now ${currentPlayer} turn.</p>`;
 };
 
-const stopGame = (message) => {
+const stopGame = (result) => {
   // Disable further moves
+  displayTurn.innerHTML = "";
   const cells = document.querySelectorAll(".cells");
   cells.forEach((cell) => {
     cell.removeEventListener("click", makeMove);
     cell.id = "game-over-cells";
   });
 
-  // Display a message (if provided)
-  if (message) {
-    const messageDiv = document.createElement("div");
-    messageDiv.textContent = message;
-    gameSection.appendChild(messageDiv);
+  // Determine and display the message
+  let message = "";
+  if (result === "player") {
+    message = "Congrats, you won! The X's defeated the O's.";
+    playerWins++;
+  } else if (result === "computer") {
+    message = "Sorry, you lost. The O's defeated the X's.";
+    computerWins++;
+  } else if (result === "tie") {
+    message = "It's a tie!";
+    ties++;
   }
+
+  const messageDiv = document.createElement("div");
+  messageDiv.textContent = message;
+  messageDiv.id = "winner-display"; // Add an ID or class for styling if needed
+  scoreBoard.insertAdjacentElement("afterend", messageDiv); // Insert the message right after the scoreboard
+
+  updateScoreboard(); // Update the scoreboard
 };
 const checkWinner = () => {
   const cells = document.querySelectorAll(".cells");
@@ -58,29 +72,20 @@ const checkWinner = () => {
 
   for (let i = 0; i < winningCombos.length; i++) {
     const [a, b, c] = winningCombos[i];
-
     if (
       cells[a].innerText &&
       cells[a].innerText === cells[b].innerText &&
       cells[a].innerText === cells[c].innerText
     ) {
-      console.log("Winner: " + cells[a].innerText);
-      stopGame("Winner: " + cells[a].innerText); // Stop the game and display winner
-      if (cells[a].innerText === "X") {
-        playerWins++;
-        updateScoreboard();
-      } else {
-        computerWins++;
-        updateScoreboard();
-      }
-
+      const winner = cells[a].innerText === "X" ? "player" : "computer";
+      stopGame(winner); // Pass the winner to stopGame
       return true;
     }
   }
   // Check for a tie
   const isTie = [...cells].every((cell) => cell.innerText !== "");
   if (isTie) {
-    stopGame("It's a tie!"); // Stop the game in case of a tie
+    stopGame("tie"); // Indicate a tie
     ties++;
     updateScoreboard();
     return true;
@@ -92,7 +97,7 @@ const checkWinner = () => {
 const updateScoreboard = () => {
   scoreBoard.innerHTML = `
     <h3>ScoreBoard</h3>
-    <div>
+    <div id="scoreboard-info">
       <div>Player Wins: ${playerWins}</div>
       <div>Computer Wins: ${computerWins}</div>
       <div>Ties: ${ties}</div>
@@ -151,26 +156,29 @@ const playTic = () => {
     const cell = document.createElement("div");
     cell.classList.add("cells");
     cell.dataset.index = i;
+    cell.innerHTML = "";
     gameBoard.append(cell);
     cell.addEventListener("click", makeMove);
   }
   scoreBoard.innerHTML = `
   <h3>ScoreBoard</h3>
-  <div>
+  <div id="scoreboard-info">
   <div>Player Wins: ${playerWins}</div>
   <div>Computer Wins: ${computerWins}</div>
   <div>Ties: ${ties}</div></div>`;
   const clearButton = document.createElement("button");
-  clearButton.innerText = "Reset";
+  clearButton.innerText = "Play Again";
   clearButton.addEventListener("click", () => {
     playTic();
   });
+  const newButtonDiv = document.createElement("div");
+  newButtonDiv.append(backButton, clearButton);
+  newButtonDiv.classList.add("button-container");
   gameSection.append(
     gameTitle,
     scoreBoard,
+    newButtonDiv,
     displayTurn,
-    gameBoard,
-    backButton,
-    clearButton
+    gameBoard
   );
 };
