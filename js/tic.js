@@ -29,8 +29,8 @@ const indicateTurn = () => {
 };
 
 const stopGame = (result) => {
+  setTimeout;
   // Disable further moves
-  displayTurn.innerHTML = "";
   const cells = document.querySelectorAll(".cells");
   cells.forEach((cell) => {
     cell.removeEventListener("click", makeMove);
@@ -119,6 +119,7 @@ const computerTurn = () => {
 // main functions
 export const loadTic = () => {
   gameSection.innerHTML = "";
+  gameSection.classList.add("center-section");
   showSection(gameSection);
   hideSection(introSection);
   const buttonDiv = document.createElement("div");
@@ -132,6 +133,7 @@ export const loadTic = () => {
 };
 
 const makeMove = (event) => {
+  gameSection.classList.remove();
   let selectedCell = event.target;
   if (playerTurn && selectedCell.innerText === "") {
     selectedCell.innerText = "X";
@@ -139,12 +141,14 @@ const makeMove = (event) => {
     const gameEnded = checkWinner(); // Check if the game has ended
     if (!gameEnded) {
       indicateTurn();
-      setTimeout(computerTurn, 2000); // Proceed to computer's turn only if game hasn't ended
+      setTimeout(computerTurn, 500); // Proceed to computer's turn only if game hasn't ended
     }
   }
 };
 
 const playTic = () => {
+  gameSection.classList.remove("center-selection");
+
   playerTurn = true; // Ensure the game starts with the player's turn
   currentPlayer = "Your"; // Reset the current player display
   indicateTurn(); // Update turn display

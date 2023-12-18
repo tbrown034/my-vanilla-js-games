@@ -1,4 +1,4 @@
-import { showSection, hideSection, goBack } from "../script.js";
+import { goBack, showSection, hideSection } from "../script.js";
 
 // DOM selectors
 const gameSection = document.getElementById("game-section");
@@ -25,6 +25,7 @@ const turnMessage = document.createElement("div");
 // Main functions
 export const loadRock = () => {
   gameSection.innerHTML = "";
+  gameSection.classList.add("center-section");
   showSection(gameSection);
   hideSection(introSection);
   const buttonDiv = document.createElement("div");
@@ -39,6 +40,8 @@ export const loadRock = () => {
 };
 
 const playRock = () => {
+  gameSection.classList.remove("center-selection");
+
   gameSection.innerHTML = "";
   const gameBoard = document.createElement("div");
   gameBoard.id = "rock-gameboard";
@@ -54,9 +57,9 @@ const playRock = () => {
     <div id="rock-computer-choices">
       <h3>Computer Choices</h3>
       <div class="button-container">
-      <div id="computer-rock"><i class="fa-solid fa-hand-back-fist"></i> Rock</div>
-      <div id="computer-paper"><i class="fa-solid fa-hand"></i> Paper</div>
-      <div id="computer-scissors"><i class="fa-solid fa-hand-scissors"></i> Scissors</div>
+      <div class="computer-icons"><i class="fa-solid fa-hand-back-fist"></i> Rock</div>
+      <div class="computer-icons"><i class="fa-solid fa-hand"></i> Paper</div>
+      <div class="computer-icons"><i class="fa-solid fa-hand-scissors"></i> Scissors</div>
       </div>
     </div>
   `;
@@ -68,7 +71,7 @@ const playRock = () => {
     <div>Ties: ${ties}</div>
   </div>`;
   const turnMessage = document.createElement("div");
-  turnMessage.innerText = "It is now your turn.";
+  turnMessage.innerHTML = "It is now your turn.";
 
   gameSection.append(gameTitle, scoreBoard, backButton, turnMessage, gameBoard);
 
