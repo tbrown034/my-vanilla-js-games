@@ -189,6 +189,8 @@ rock-gameboard {
   height: 600px;
   width: 700px;
   background-color: lightblue;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #connect-cells {
@@ -211,4 +213,12 @@ rock-gameboard {
 button,
 .cells {
   cursor: pointer; /* Only for interactive elements */
+}
+
+.connect-cell {
+  height: 100px;
+  width: 100px;
+  border: solid 2px #333;
+  box-sizing: border-box;
+  background-color: wheat;
 }

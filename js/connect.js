@@ -6,7 +6,7 @@ const introSection = document.getElementById("intro-section");
 
 const backButton = document.createElement("button");
 backButton.innerText = "Main Menu";
-const displayTurn = document.createElement("div");
+const turnMessage = document.createElement("div");
 const scoreBoard = document.createElement("div");
 scoreBoard.id = "connect-scoreboard";
 const gameBoard = document.createElement("div");
@@ -50,5 +50,17 @@ const playConnect = () => {
     <div>Computer Wins: ${computerWins}</div>
     <div>Ties: ${ties}</div>
   </div>`;
-  gameSection.append(scoreBoard, backButton, gameBoard);
+  for (let r = 0; r < 7; r++) {
+    const row = document.createElement("div");
+    row.classList.add("game-row");
+    for (let c = 0; c < 6; c++) {
+      const cell = document.createElement("div");
+      cell.classList.add("connect-cell");
+      cell.id = `cell-${r}-${c}`; // ID for each cell
+      row.append(cell);
+    }
+    gameBoard.append(row);
+  }
+  turnMessage.innerHTML = "It is now your turn.";
+  gameSection.append(scoreBoard, backButton, turnMessage, gameBoard);
 };
