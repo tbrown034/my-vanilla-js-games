@@ -1,10 +1,14 @@
 import { goBack, showSection, hideSection } from "../script.js";
+
 // DOM selectors
 const gameSection = document.getElementById("game-section");
 const introSection = document.getElementById("intro-section");
-// game variables
-let Heads = 0;
-let Tails = 0;
+
+// Game variables
+let playerWins = 0;
+let computerWins = 0;
+let ties = 0;
+
 // Global elements
 const gameTitle = document.createElement("h1");
 gameTitle.innerText = "Heads or Tails";
@@ -17,6 +21,7 @@ const scoreBoard = document.createElement("div");
 scoreBoard.id = "head-scoreboard";
 const gameBoard = document.createElement("div");
 gameBoard.id = "head-gameboard";
+
 // Main functions
 // Step #1: Create Head or Tails Main Screen
 export const loadHead = () => {
@@ -33,26 +38,28 @@ export const loadHead = () => {
   buttonDiv.append(playNow, backButton);
   gameSection.append(gameTitle, gameSubtitle, buttonDiv);
 };
-// Step #2: Initialize Game (setting up gameboard, scoreboard, ect) and Wait for Player to Move
+
+// Step #2: Initialize Game
 const playHead = () => {
   gameSection.innerHTML = "";
-  scoreBoard.innerHTML = `
-  <h3>ScoreBoard</h3>
-  <div id="scoreboard-info">
-  <div>Heads: ${Heads}</div>
-  <div>Tails: ${Tails}</div>
- </div>`;
+  updateScoreboard();
   gameBoard.innerHTML = `
-  <div id="head-player-choices">
-    <h3>Player Choices</h3>
+    <div id="head-player-choices">
+      <h3>Player Choices</h3>
+      <div class="button-container">
+        <button id="player-heads"><i class="fa-solid fa-head-side"></i>    Heads</button>
+        <button id="player-tails"><i class="fa-solid fa-monkey"></i>  Tails</button>
+      </div>
+    </div>
+    <div id="head-computer-choices">
+    <h3>Computer Choices</h3>
     <div class="button-container">
-    <button id="player-heads"><i class="fa-solid fa-head-side"></i>  Heads</button>
-    <button id="player-tails"><i class="fa-solid fa-monkey"></i>  Tails</button>
+    <div class="computer-icons"><i class="fa-solid fa-head-side"></i>    Heads</div>
+    <div class="computer-icons"><i class="fa-solid fa-monkey"></i>  Tails</</div>
     </div>
   </div>
+    `;
 
-  </div>
-`;
   const turnMessage = document.createElement("div");
   turnMessage.innerHTML = "It is now your turn.";
   gameSection.append(gameTitle, scoreBoard, backButton, turnMessage, gameBoard);
@@ -63,16 +70,32 @@ const playHead = () => {
     .getElementById("player-tails")
     .addEventListener("click", () => playerChoice("Tails"));
 };
-const playerChoice = (choice) => {
-  document.getElementById("player-heads").disabled = true;
-  document.getElementById("player-tails").disabled = true;
-  console.log("Player selected:", choice);
-  const playerChoiceDisplay = document.createElement("p");
-  playerChoiceDisplay.innerHTML = `<div><p>You has chosen ${choice}</p></div>`;
-  document
-    .getElementById("head-player-choices")
-    .appendChild(playerChoiceDisplay);
-  tallyScore(choice);
+
+const playerChoice = (playerGuess) => {
+  const computerGuess = Math.random() < 0.5 ? "Heads" : "Tails";
+  const coinFlipResult = Math.random() < 0.5 ? "Heads" : "Tails";
+  const choicesDisplay = document.createElement("div");
+  choicesDisplay.innerHTML = `
+    <p>Your choice: ${playerGuess}</p>
+    <p>Computer's choice: ${computerGuess}</p>
+    <p>Coin flip result: ${coinFlipResult}</p>`;
+
+  const winnerDisplay = document.createElement("div");
+  if (playerGuess === coinFlipResult && computerGuess !== coinFlipResult) {
+    playerWins++;
+    winnerDisplay.innerText = "You win!";
+  } else if (
+    playerGuess !== coinFlipResult &&
+    computerGuess === coinFlipResult
+  ) {
+    computerWins++;
+    winnerDisplay.innerText = "Computer wins!";
+  } else {
+    ties++;
+    winnerDisplay.innerText = "It's a tie!";
+  }
+
+  updateScoreboard();
   const playAgainButton = document.createElement("button");
   playAgainButton.innerText = "Play Again";
   playAgainButton.addEventListener("click", playAgain);
@@ -81,24 +104,16 @@ const playerChoice = (choice) => {
   buttonDiv.append(playAgainButton, backButton);
   gameSection.insertBefore(buttonDiv, gameSection.children[2]);
   gameSection.insertBefore(winnerDisplay, gameSection.children[2]);
-};
-
-const tallyScore = (choice) => {
-  if (choice === "Heads") {
-    Heads++;
-  } else if (choice === "Tails") {
-    // Added else if for safety
-    Tails++;
-  }
-  updateScoreboard();
+  gameSection.insertBefore(choicesDisplay, gameSection.children[2]);
 };
 
 const updateScoreboard = () => {
   scoreBoard.innerHTML = `
     <h3>ScoreBoard</h3>
     <div id="scoreboard-info">
-      <div>Heads: ${Heads}</div>
-      <div>Tails: ${Tails}</div>
+      <div>Player Wins: ${playerWins}</div>
+      <div>Computer Wins: ${computerWins}</div>
+      <div>Ties: ${ties}</div>
     </div>`;
 };
 

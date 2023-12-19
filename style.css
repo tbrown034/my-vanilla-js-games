@@ -92,7 +92,7 @@ button:hover {
 /* Tic Tac Toe */
 /* Tic-Tac-Toe Board Styles */
 #tic-gameboard,
-rock-game {
+rock-gameboard {
   width: 50vw;
   height: 50vh;
   max-height: 300px;
@@ -131,7 +131,8 @@ rock-game {
 
 #tic-scoreboard,
 #rock-scoreboard,
-#head-scoreboard {
+#head-scoreboard,
+#connect-scoreboard {
   /* Added #head-scoreboard */
   display: flex;
   border-radius: 10px;
@@ -182,6 +183,19 @@ rock-game {
   gap: 5px;
   justify-content: center;
   align-items: center;
+}
+
+#connect-gameboard {
+  height: 600px;
+  width: 700px;
+  background-color: lightblue;
+}
+
+#connect-cells {
+  height: 100px;
+  width: 100px;
+  border: #333;
+  box-sizing: border-box;
 }
 
 #winner-display {

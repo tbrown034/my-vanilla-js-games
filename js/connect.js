@@ -2,8 +2,24 @@ import { showSection, hideSection, goBack } from "../script.js";
 
 const gameSection = document.getElementById("game-section");
 const introSection = document.getElementById("intro-section");
+// global elements
+
+const backButton = document.createElement("button");
+backButton.innerText = "Main Menu";
+const displayTurn = document.createElement("div");
+const scoreBoard = document.createElement("div");
+scoreBoard.id = "connect-scoreboard";
+const gameBoard = document.createElement("div");
+gameBoard.id = "connect-gameboard";
+
+// game variables
+
+let playerWins = 0;
+let computerWins = 0;
+let ties = 0;
 
 // main functions
+//Loads Game Screen
 export const loadConnect = () => {
   gameSection.innerHTML = "";
   showSection(gameSection);
@@ -15,12 +31,24 @@ export const loadConnect = () => {
     "Connect Four is a two-player connection game in which the players first choose a color and then take turns dropping colored discs into a seven-column, six-row vertically suspended grid. The objective is to be the first to form a horizontal, vertical, or diagonal line of four of one's own discs.";
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("button-container");
-  const backButton = document.createElement("button");
-  backButton.innerText = "Go Back";
   backButton.addEventListener("click", goBack);
   const playNow = document.createElement("button");
   playNow.innerText = "Play Now";
+  playNow.addEventListener("click", playConnect);
   buttonDiv.append(playNow, backButton);
   gameSection.append(gameTitle, gameSubtitle, buttonDiv);
   console.log("here at connect");
+};
+
+//Start Game
+
+const playConnect = () => {
+  gameSection.innerHTML = "";
+  scoreBoard.innerHTML = `    <h3>ScoreBoard</h3>
+  <div id="scoreboard-info">
+    <div>Player Wins: ${playerWins}</div>
+    <div>Computer Wins: ${computerWins}</div>
+    <div>Ties: ${ties}</div>
+  </div>`;
+  gameSection.append(scoreBoard, backButton, gameBoard);
 };
