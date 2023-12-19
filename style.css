@@ -188,16 +188,9 @@ rock-gameboard {
 #connect-gameboard {
   height: 600px;
   width: 700px;
-  background-color: lightblue;
   display: flex;
   flex-wrap: wrap;
-}
-
-#connect-cells {
-  height: 100px;
-  width: 100px;
-  border: #333;
-  box-sizing: border-box;
+  background-color: aliceblue;
 }
 
 #winner-display {
@@ -209,16 +202,22 @@ rock-gameboard {
   margin-top: 5px;
 }
 
-/* Accessibility and UX */
-button,
-.cells {
-  cursor: pointer; /* Only for interactive elements */
-}
-
 .connect-cell {
   height: 100px;
   width: 100px;
-  border: solid 2px #333;
   box-sizing: border-box;
-  background-color: wheat;
+  border: #333 solid 2px;
+}
+
+.connect-col:hover {
+  background-color: rgb(155, 192, 192);
+  cursor: pointer;
+}
+
+.player-occupied {
+  background-color: blue;
+}
+
+.computer-occupied {
+  background-color: red;
 }
