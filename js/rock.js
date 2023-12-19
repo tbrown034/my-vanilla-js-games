@@ -49,17 +49,17 @@ const playRock = () => {
     <div id="rock-player-choices">
       <h3>Player Choices</h3>
       <div class="button-container">
-      <button id="player-rock"><i class="fa-solid fa-hand-back-fist"></i> Rock</button>
-      <button id="player-paper"><i class="fa-solid fa-hand"></i> Paper</button>
-      <button id="player-scissors"><i class="fa-solid fa-hand-scissors fa-flip-horizontal"></i> Scissors</button>
+      <button id="player-rock"><i class="fa-solid fa-hand-back-fist"></i>  Rock</button>
+      <button id="player-paper"><i class="fa-solid fa-hand"></i>  Paper</button>
+      <button id="player-scissors"><i class="fa-solid fa-hand-scissors fa-flip-horizontal"></i>  Scissors</button>
       </div>
     </div>
     <div id="rock-computer-choices">
       <h3>Computer Choices</h3>
       <div class="button-container">
-      <div class="computer-icons"><i class="fa-solid fa-hand-back-fist"></i> Rock</div>
-      <div class="computer-icons"><i class="fa-solid fa-hand"></i> Paper</div>
-      <div class="computer-icons"><i class="fa-solid fa-hand-scissors"></i> Scissors</div>
+      <div class="computer-icons"><i class="fa-solid fa-hand-back-fist"></i>  Rock</div>
+      <div class="computer-icons"><i class="fa-solid fa-hand"></i>  Paper</div>
+      <div class="computer-icons"><i class="fa-solid fa-hand-scissors"></i>  Scissors</div>
       </div>
     </div>
   `;

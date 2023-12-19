@@ -63,6 +63,10 @@ button:hover {
   height: 80vh;
 }
 
+#header-title {
+  cursor: pointer;
+}
+
 /* Intro section */
 #intro-section {
   flex-direction: column;
@@ -160,6 +164,8 @@ rock-game {
 #rock-player-choices,
 #rock-computer-choices,
 #head-player-choices,
+#head-computer-choices,
+#head-player-choices,
 #head-computer-choices {
   /* Corrected selector */
   display: flex;
@@ -169,7 +175,8 @@ rock-game {
   padding: 5px 10px;
 }
 
-#rock-gameboard {
+#rock-gameboard,
+#head-gameboard {
   display: flex;
   flex-direction: column;
   gap: 5px;

@@ -10,6 +10,7 @@ const ticButton = document.getElementById("tic-button");
 const rockButton = document.getElementById("rock-button");
 const connectButton = document.getElementById("connect-button");
 const headButton = document.getElementById("head-button");
+const headerTitle = document.getElementById("header-title");
 // helper functions
 export const goBack = () => {
   hideSection(gameSection);
@@ -51,3 +52,4 @@ ticButton.addEventListener("click", () => selectGameClick("tic"));
 rockButton.addEventListener("click", () => selectGameClick("rock"));
 connectButton.addEventListener("click", () => selectGameClick("connect"));
 headButton.addEventListener("click", () => selectGameClick("head"));
+headerTitle.addEventListener("click", goBack);
