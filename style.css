@@ -256,7 +256,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  min-width: 50%;
+  min-width: 80%;
   margin-top: 40px;
 }
 
@@ -284,4 +284,9 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.like-a-button:active,
+button:active {
+  transform: translateY(-1px) scale(0.98);
 }
