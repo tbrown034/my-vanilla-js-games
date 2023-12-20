@@ -20,6 +20,11 @@ header {
   font-family: "Roboto", sans-serif;
 }
 
+#header-title:hover,
+#hamburger-menu:hover {
+  color: #eab8b8;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -88,6 +93,12 @@ button:hover {
 
 #header-title {
   cursor: pointer;
+  display: flex;
+  gap: 7.5px;
+}
+
+#header-title-one {
+  color: #eaa7a7;
 }
 
 /* Intro section */

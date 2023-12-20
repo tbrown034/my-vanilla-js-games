@@ -15,10 +15,10 @@
   <body>
     <header>
       <div id="header-title">
-        <i class="fa-duotone fa-ice-cream"></i> <strong>Vanilla</strong> JS
-        Games
+        <i style="color: #eab8b8" ; class="fa-duotone fa-ice-cream"></i>
+        <strong>Vanilla</strong> JS Games
       </div>
-      <div><i class="fa-regular fa-bars"></i></div>
+      <div id="hamburger-menu"><i class="fa-regular fa-bars"></i></div>
     </header>
     <main>
       <div class="display" id="intro-section">
@@ -42,6 +42,10 @@
         </div>
 
         <div id="game-menu-container">
+          <button id="connect-button">
+            <p>Connect Four</p>
+            <i class="fa-duotone fa-grid-round-4"></i>
+          </button>
           <button id="tic-button">
             <p>Tic Tac Toe</p>
             <i class="fa-solid fa-grid"></i>
@@ -54,6 +58,7 @@
               ><i class="fa-solid fa-hand-scissors fa-flip-horizontal"> </i>
             </div>
           </button>
+
           <button id="head-button">
             <p>Heads or Tails</p>
             <div class="icon-holder">
@@ -61,10 +66,6 @@
               <p>Or</p>
               <i class="fa-solid fa-monkey"></i>
             </div>
-          </button>
-          <button id="connect-button">
-            <p>Connect Four</p>
-            <i class="fa-duotone fa-grid-round-4"></i>
           </button>
         </div>
       </div>
