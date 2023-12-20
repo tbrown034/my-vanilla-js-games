@@ -1,48 +1,75 @@
 /* Elements */
 body {
   margin: 0;
-  background-color: mintcream;
-  color: darkslategrey;
+  background-color: #e6e1d3; /* Light beige - Vanilla Ice Cream Theme */
+  color: #4b3f3f; /* Dark brown for text */
   font-family: "Segoe UI", Tahoma, Geneva, sans-serif;
   display: flex;
   flex-direction: column;
-  font-size: larger;
+  min-height: 100vh;
 }
 
 header {
   padding: 20px;
+  font-size: xx-large;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #196670;
-  color: mintcream;
+  background-color: #6f6459; /* Coffee color for header */
+  color: #e6e1d3; /* Light beige text in header */
   font-family: "Roboto", sans-serif;
 }
 
 main {
-  min-height: 80vh;
   display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Ensures main content takes up available space */
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  padding: 0px 10px;
+  padding: 20px; /* Adjust as needed */
+}
+
+.like-a-button {
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #6f6459; /* Slightly darker border */
+  padding: 10px 15px;
+  background-color: #eab8b8; /* Strawberry cream red */
+  color: #6f6459; /* Coffee color text */
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
+}
+
+.like-a-button:hover {
+  background-color: #6f6459; /* Coffee color */
+  color: #eab8b8; /* Strawberry cream red */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
 }
 
 button {
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  border: 1px solid #6f6459; /* Slightly darker border */
   padding: 10px 15px;
-  background-color: mintcream;
-  color: darkslategrey;
+  background-color: #6f6459; /* Coffee color */
+  color: #eab8b8; /* Strawberry cream red */
+
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  border: #333 3px solid;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s;
   font-size: large;
+  font-weight: bold; /* Making text bold */
+  /* font-family: 'Arial', sans-serif; Uncomment and choose your font */
 }
 
 button:hover {
-  background-color: #333;
-  color: mintcream;
+  background-color: #eab8b8; /* Strawberry cream red */
+  color: #6f6459; /* Coffee color for text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly larger shadow */
+  transform: translateY(-2px); /* Slight lift */
 }
 
 .button-container {
@@ -59,10 +86,6 @@ button:hover {
   display: flex;
 }
 
-.center-section {
-  height: 80vh;
-}
-
 #header-title {
   cursor: pointer;
 }
@@ -73,8 +96,8 @@ button:hover {
   justify-content: center;
   align-items: center;
   gap: 20px;
+  margin-top: 20px;
   text-align: center;
-  min-height: 75vh;
 }
 
 #game-section {
@@ -92,20 +115,20 @@ button:hover {
 /* Tic Tac Toe */
 /* Tic-Tac-Toe Board Styles */
 #tic-gameboard,
-rock-gameboard {
+#rock-gameboard {
   width: 50vw;
   height: 50vh;
   max-height: 300px;
   max-width: 600px;
   max-height: 600px;
-  background-color: rgb(49, 81, 81);
+  background-color: #d9cab3; /* Muted vanilla for game-boards */
   display: flex;
   flex-wrap: wrap;
 }
 
 .cells {
   flex: 1 0 33%; /* Flex grow, shrink, and basis set to allocate around one-third of the board's space to each cell */
-  background-color: aliceblue;
+  background-color: #d9cab3; /* Muted vanilla for cells */
   border: #333 solid 2px;
   box-sizing: border-box;
   display: flex;
@@ -114,15 +137,15 @@ rock-gameboard {
   max-width: 200px;
   align-items: center;
   font-weight: bold;
-  color: darkslategrey;
+  color: #4b3f3f; /* Dark brown for text */
 }
 
 .computer-icons {
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   padding: 10px 15px;
-  background-color: mintcream;
-  color: darkslategrey;
+  background-color: #eab8b8; /* Strawberry cream red */
+  color: #4b3f3f; /* Dark brown text */
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
   border: #333 3px solid;
@@ -133,7 +156,6 @@ rock-gameboard {
 #rock-scoreboard,
 #head-scoreboard,
 #connect-scoreboard {
-  /* Added #head-scoreboard */
   display: flex;
   border-radius: 10px;
   width: 100%;
@@ -153,7 +175,7 @@ rock-gameboard {
 }
 
 .cells:hover {
-  background-color: rgb(155, 192, 192);
+  background-color: #c5bbaf; /* Darker shade for hover */
   cursor: pointer;
 }
 
@@ -165,10 +187,7 @@ rock-gameboard {
 #rock-player-choices,
 #rock-computer-choices,
 #head-player-choices,
-#head-computer-choices,
-#head-player-choices,
 #head-computer-choices {
-  /* Corrected selector */
   display: flex;
   gap: 5px;
   flex-direction: column;
@@ -190,12 +209,12 @@ rock-gameboard {
   width: 700px;
   display: flex;
   flex-wrap: wrap;
-  background-color: aliceblue;
+  background-color: #d9cab3; /* Muted vanilla for connect gameboard */
 }
 
 #winner-display {
   font-weight: bold;
-  color: #196670;
+  color: #6f6459; /* Coffee color for winner text */
   background-color: #f0f0f0; /* Standout background */
   border: 1px solid #ccc;
   padding: 10px;
@@ -210,14 +229,48 @@ rock-gameboard {
 }
 
 .connect-col:hover {
-  background-color: rgb(155, 192, 192);
+  background-color: #c5bbaf; /* Darker shade for hover */
   cursor: pointer;
 }
 
 .player-occupied {
-  background-color: blue;
+  background-color: #4b3f3f; /* Dark brown for player occupied */
 }
 
 .computer-occupied {
-  background-color: red;
+  background-color: #eab8b8; /* Strawberry cream red for computer occupied */
+}
+
+#game-menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 50%;
+  margin-top: 40px;
+}
+
+#game-menu-container button {
+  min-height: 200px;
+  font-size: xx-large;
+}
+
+.icon-holder {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+}
+
+footer {
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, sans-serif;
+  text-align: center;
+  background-color: #6f6459; /* Coffee color for footer */
+  color: #e6e1d3; /* Light beige text in footer */
+}
+
+#center-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -23,21 +23,65 @@
     <main>
       <div class="display" id="intro-section">
         <h1>Welcome to Vanilla JS Games</h1>
-        <p>
-          Play some of the most cutting-edge and ambitious games created at
-          Vanilla JS Games. To get started click on the game below and get
-          gaming!
-        </p>
+        <h3>
+          Hi! I'm Trevor and I developed this simple gaming website using
+          vanilla javascript. Try your hand at a game below or find out more
+          about me or this project.
+        </h3>
         <div class="button-container">
-          <button id="tic-button">Tic Tac Toe</button>
-          <button id="rock-button">Rock Paper Scissors</button>
-          <button id="head-button">Heads or Tails</button>
+          <a class="like-a-button" href="https://trevorthewebdeveloper.com"
+            >About Trevor</a
+          >
+          <div class="button-container">
+            <a
+              class="like-a-button"
+              href="https://github.com/tbrown034/my-vanilla-js-games"
+              >GitHub</a
+            >
+          </div>
+        </div>
 
-          <button id="connect-button">Connect Four</button>
+        <div id="game-menu-container">
+          <button id="tic-button">
+            <p>Tic Tac Toe</p>
+            <i class="fa-solid fa-grid"></i>
+          </button>
+          <button id="rock-button">
+            <p>Rock, Paper, Scissors</p>
+            <div class="icon-holder">
+              <i class="fa-solid fa-hand-back-fist"></i
+              ><i class="fa-solid fa-hand"></i
+              ><i class="fa-solid fa-hand-scissors fa-flip-horizontal"> </i>
+            </div>
+          </button>
+          <button id="head-button">
+            <p>Heads or Tails</p>
+            <div class="icon-holder">
+              <i class="fa-solid fa-head-side"></i>
+              <p>Or</p>
+              <i class="fa-solid fa-monkey"></i>
+            </div>
+          </button>
+          <button id="connect-button">
+            <p>Connect Four</p>
+            <i class="fa-duotone fa-grid-round-4"></i>
+          </button>
         </div>
       </div>
       <div class="hide" id="game-section"></div>
     </main>
+    <footer>
+      <p>
+        This website was created by Trevor Brown using a tech stack that
+        includes Node.js and vanilla javascript. Thanks for visiting!
+      </p>
+      <div id="center-div">
+        <a href="mailto:trevorbrown.web@gmail.com" class="like-a-button"
+          >Contact Me</a
+        >
+      </div>
+    </footer>
+
     <script type="module" src="script.js"></script>
   </body>
 </html>
