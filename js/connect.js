@@ -23,6 +23,11 @@ export const loadConnect = () => {
   gameSection.innerHTML = "";
   showSection(gameSection);
   hideSection(introSection);
+  const photoDiv = document.createElement("div");
+  const gameImage = document.createElement("img");
+  gameImage.src = "assets/photos/vanilla-connect.png"; // Set the source to the image path
+  gameImage.alt = "Description of the image"; // Always good to have an alt text
+  photoDiv.appendChild(gameImage);
 
   const gameSubtitle = document.createElement("h3");
   gameSubtitle.innerText =
@@ -34,7 +39,7 @@ export const loadConnect = () => {
   playNow.innerText = "Play Now";
   playNow.addEventListener("click", playConnect);
   buttonDiv.append(playNow, backButton);
-  gameSection.append(gameTitle, gameSubtitle, buttonDiv);
+  gameSection.append(gameTitle, gameSubtitle, buttonDiv, photoDiv);
   console.log("Connect Four loaded.");
 };
 

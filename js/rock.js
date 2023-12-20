@@ -28,6 +28,11 @@ export const loadRock = () => {
   gameSection.classList.add("center-section");
   showSection(gameSection);
   hideSection(introSection);
+  const photoDiv = document.createElement("div");
+  const gameImage = document.createElement("img");
+  gameImage.src = "assets/photos/vanilla-hands.png"; // Set the source to the image path
+  gameImage.alt = "Description of the image"; // Always good to have an alt text
+  photoDiv.appendChild(gameImage);
   const buttonDiv = document.createElement("div");
   buttonDiv.id = "rps-button-container";
   buttonDiv.classList.add("button-container");

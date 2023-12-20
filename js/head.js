@@ -28,6 +28,12 @@ export const loadHead = () => {
   gameSection.innerHTML = "";
   showSection(gameSection);
   hideSection(introSection);
+  const photoDiv = document.createElement("div");
+  const gameImage = document.createElement("img");
+  gameImage.src = "assets/photos/vanilla-heads.png"; // Set the source to the image path
+  gameImage.alt = "Description of the image"; // Always good to have an alt text
+  photoDiv.appendChild(gameImage);
+
   const buttonDiv = document.createElement("div");
   buttonDiv.id = "head-button-container";
   buttonDiv.classList.add("button-container");
@@ -36,7 +42,7 @@ export const loadHead = () => {
   playNow.addEventListener("click", playHead);
   backButton.addEventListener("click", goBack);
   buttonDiv.append(playNow, backButton);
-  gameSection.append(gameTitle, gameSubtitle, buttonDiv);
+  gameSection.append(gameTitle, gameSubtitle, buttonDiv, photoDiv);
 };
 
 // Step #2: Initialize Game

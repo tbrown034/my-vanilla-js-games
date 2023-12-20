@@ -122,6 +122,11 @@ export const loadTic = () => {
   gameSection.classList.add("center-section");
   showSection(gameSection);
   hideSection(introSection);
+  const photoDiv = document.createElement("div");
+  const gameImage = document.createElement("img");
+  gameImage.src = "assets/photos/vanilla-tic.png"; // Set the source to the image path
+  gameImage.alt = "Description of the image"; // Always good to have an alt text
+  photoDiv.appendChild(gameImage);
   const buttonDiv = document.createElement("div");
   buttonDiv.classList.add("button-container");
   backButton.addEventListener("click", goBack);
@@ -129,7 +134,7 @@ export const loadTic = () => {
   playNow.innerText = "Play Now";
   playNow.addEventListener("click", playTic);
   buttonDiv.append(playNow, backButton);
-  gameSection.append(gameTitle, gameSubtitle, buttonDiv);
+  gameSection.append(gameTitle, gameSubtitle, buttonDiv, photoDiv);
 };
 
 const makeMove = (event) => {
