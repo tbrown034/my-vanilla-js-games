@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Play classic games like Connect Four, Tic Tac Toe, and more with Vanilla JS Games. This is a jr. dev. game developed by Trevor Brown."
+      content="Play classic games like Connect Four, Tic Tac Toe, and more with Vanilla JS Games"
     />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/games.css" />
 
-    <link rel="stylesheet" href="style.css" />
     <title>Vanilla JS Games</title>
     <script
       src="https://kit.fontawesome.com/97ca5b5e4b.js"
@@ -33,7 +34,8 @@
           vanilla javascript. Try your hand at a game below or find out more
           about me or this project.
         </h3>
-        <div class="button-container">
+
+        <div id="about-github" class="button-container">
           <a class="like-a-button" href="https://trevorthewebdeveloper.com"
             >About Trevor</a
           >
@@ -49,15 +51,19 @@
         <div id="game-menu-container">
           <button id="connect-button">
             <p>Connect Four</p>
-            <i class="fa-duotone fa-grid-round-4"></i>
+            <div class="icon-holder">
+              <i class="fa-duotone fa-grid-round-4"></i>
+            </div>
           </button>
           <button id="tic-button">
             <p>Tic Tac Toe</p>
-            <i class="fa-solid fa-grid"></i>
+            <div class="icon-holder">
+              <i class="fa-solid fa-grid"></i>
+            </div>
           </button>
           <button id="rock-button">
             <p>Rock, Paper, Scissors</p>
-            <div class="icon-holder">
+            <div id="display-flex" class="icon-holder">
               <i class="fa-solid fa-hand-back-fist"></i
               ><i class="fa-solid fa-hand"></i
               ><i class="fa-solid fa-hand-scissors fa-flip-horizontal"> </i>

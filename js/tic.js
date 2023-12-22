@@ -123,6 +123,7 @@ export const loadTic = () => {
   showSection(gameSection);
   hideSection(introSection);
   const photoDiv = document.createElement("div");
+  photoDiv.classList.add("photo-div");
   const gameImage = document.createElement("img");
   gameImage.src = "assets/photos/vanilla-tic.png"; // Set the source to the image path
   gameImage.alt = "Description of the image"; // Always good to have an alt text

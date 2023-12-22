@@ -1,0 +1,111 @@
+#game-section {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+#tic-gameboard,
+#rock-gameboard {
+  width: 50vw;
+  height: 50vh;
+  max-width: 600px;
+  max-height: 600px;
+  background-color: #d9cab3; /* Muted vanilla for game-boards */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.inactive-button {
+  cursor: not-allowed;
+}
+
+.cells {
+  flex: 1 0 33%; /* Flex grow, shrink, and basis set to allocate around one-third of the board's space to each cell */
+  background-color: #d9cab3; /* Muted vanilla for cells */
+  border: #333 solid 2px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 200px;
+  font-weight: bold;
+  color: #4b3f3f; /* Dark brown for text */
+}
+
+.cells:hover {
+  background-color: #c5bbaf; /* Darker shade for hover */
+  cursor: pointer;
+}
+
+/* Rock Paper Scissors */
+#rock-player-choices,
+#rock-computer-choices,
+#head-player-choices,
+#head-computer-choices,
+#connect-gameboard,
+#winner-display,
+.connect-cell {
+  /* Common styles for game elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-holder i {
+  font-size: 50px; /* or any size you prefer */
+}
+
+#rock-gameboard,
+#head-gameboard,
+#connect-gameboard {
+  flex-direction: column;
+  gap: 5px;
+}
+
+#connect-gameboard {
+  height: 600px;
+  width: 700px;
+  flex-wrap: wrap;
+  background-color: #d9cab3; /* Muted vanilla for connect gameboard */
+}
+
+.connect-cell {
+  height: 100px;
+  width: 100px;
+  box-sizing: border-box;
+  border: #333 solid 2px;
+}
+
+.connect-col:hover {
+  background-color: #c5bbaf; /* Darker shade for hover */
+  cursor: pointer;
+}
+
+.player-occupied,
+.computer-occupied {
+  /* Styles for occupied cells */
+  background-color: #4b3f3f; /* Dark brown for player occupied */
+}
+
+.computer-occupied {
+  background-color: #eab8b8; /* Strawberry cream red for computer occupied */
+}
+
+#game-menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 80%;
+  margin-top: 40px;
+}
+
+#game-menu-container button {
+  min-height: 200px;
+  font-size: xx-large;
+}
+
+.icon-holder {
+  gap: 30px;
+}
