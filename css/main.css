@@ -44,7 +44,7 @@ button {
   background-color: #d3a5a5; /* Muted strawberry cream red */
   color: #ffffff; /* White text for better contrast */
   text-decoration: none;
-  font-size: 30px; /* Larger font size for better readability */
+  font-size: 20px; /* Larger font size for better readability */
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -67,7 +67,7 @@ button:hover {
 }
 
 #about-github .like-a-button:hover {
-  background-color: #9d9494; /* Softened light coffee color for hover */
+  background-color: #6f6459;
   color: #fff; /* White color for text on hover */
 }
 
@@ -115,8 +115,25 @@ button:active {
 .photo-div img {
   max-width: 50%; /* Ensure the image is responsive */
   height: auto; /* Maintain aspect ratio */
-  margin-bottom: 1em;
+  margin-top: 1em;
   border-radius: 20px;
+}
+
+#game-menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 80%;
+  margin-top: 40px;
+}
+
+#game-menu-container button {
+  min-height: 200px;
+  font-size: xx-large;
+}
+
+.icon-holder {
+  gap: 30px;
 }
 
 #center-div {

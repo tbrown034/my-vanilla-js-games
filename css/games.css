@@ -2,8 +2,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
   text-align: center;
+  gap: 20px;
 }
 
 #tic-gameboard,
@@ -57,23 +57,16 @@
   font-size: 50px; /* or any size you prefer */
 }
 
-#rock-gameboard,
-#head-gameboard,
 #connect-gameboard {
-  flex-direction: column;
-  gap: 5px;
-}
-
-#connect-gameboard {
-  height: 600px;
-  width: 700px;
+  height: 300px;
+  width: 350px;
   flex-wrap: wrap;
   background-color: #d9cab3; /* Muted vanilla for connect gameboard */
 }
 
 .connect-cell {
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   box-sizing: border-box;
   border: #333 solid 2px;
 }
@@ -93,19 +86,21 @@
   background-color: #eab8b8; /* Strawberry cream red for computer occupied */
 }
 
-#game-menu-container {
+#connect-scoreboard {
+  background-color: #d9cab3;
+  width: 80%;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+#scoreboard-info {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-width: 80%;
-  margin-top: 40px;
+  gap: 5px;
+  font-size: larger;
 }
 
-#game-menu-container button {
-  min-height: 200px;
-  font-size: xx-large;
-}
-
-.icon-holder {
-  gap: 30px;
+.turn-message {
+  font-size: 30px;
+  color: #333;
 }

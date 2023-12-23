@@ -6,6 +6,7 @@ const introSection = document.getElementById("intro-section");
 const backButton = document.createElement("button");
 backButton.innerText = "Main Menu";
 const turnMessage = document.createElement("div");
+turnMessage.classList.add("turn-message");
 const scoreBoard = document.createElement("div");
 scoreBoard.id = "connect-scoreboard";
 const gameBoard = document.createElement("div");
