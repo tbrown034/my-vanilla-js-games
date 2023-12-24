@@ -21,6 +21,7 @@ backButton.innerText = "Main Menu";
 const scoreBoard = document.createElement("div");
 scoreBoard.id = "rock-scoreboard";
 const displayMessage = document.createElement("div");
+displayMessage.classList.add("turn-message");
 
 // Main functions
 export const loadRock = () => {
@@ -78,7 +79,6 @@ const playRock = () => {
     <div>Ties: ${ties}</div>
   </div>`;
   displayMessage.innerHTML = "It is now your turn.";
-  displayMessage.classList.add("turn-message");
 
   gameSection.append(
     gameTitle,

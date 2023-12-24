@@ -21,6 +21,8 @@ const scoreBoard = document.createElement("div");
 scoreBoard.id = "head-scoreboard";
 const gameBoard = document.createElement("div");
 gameBoard.id = "head-gameboard";
+const displayMessage = document.createElement("div");
+displayMessage.classList.add("turn-message");
 
 // Main functions
 // Step #1: Create Head or Tails Main Screen
@@ -68,9 +70,14 @@ const playHead = () => {
   </div>
     `;
 
-  const turnMessage = document.createElement("div");
-  turnMessage.innerHTML = "It is now your turn.";
-  gameSection.append(gameTitle, scoreBoard, backButton, turnMessage, gameBoard);
+  displayMessage.innerHTML = "It is now your turn.";
+  gameSection.append(
+    gameTitle,
+    scoreBoard,
+    backButton,
+    displayMessage,
+    gameBoard
+  );
   document
     .getElementById("player-heads")
     .addEventListener("click", () => playerChoice("Heads"));
@@ -83,24 +90,25 @@ const playerChoice = (playerGuess) => {
   const computerGuess = Math.random() < 0.5 ? "Heads" : "Tails";
   const coinFlipResult = Math.random() < 0.5 ? "Heads" : "Tails";
   const choicesDisplay = document.createElement("div");
+  choicesDisplay.id = "choice-display";
+  displayMessage.innerHTML = "";
   choicesDisplay.innerHTML = `
     <p>Your choice: ${playerGuess}</p>
     <p>Computer's choice: ${computerGuess}</p>
     <p>Coin flip result: ${coinFlipResult}</p>`;
 
-  const winnerDisplay = document.createElement("div");
   if (playerGuess === coinFlipResult && computerGuess !== coinFlipResult) {
     playerWins++;
-    winnerDisplay.innerText = "You win!";
+    displayMessage.innerText = "You win!";
   } else if (
     playerGuess !== coinFlipResult &&
     computerGuess === coinFlipResult
   ) {
     computerWins++;
-    winnerDisplay.innerText = "Computer wins!";
+    displayMessage.innerText = "Computer wins!";
   } else {
     ties++;
-    winnerDisplay.innerText = "It's a tie!";
+    displayMessage.innerText = "It's a tie!";
   }
 
   updateScoreboard();
@@ -111,7 +119,7 @@ const playerChoice = (playerGuess) => {
   buttonDiv.classList.add("button-container");
   buttonDiv.append(playAgainButton, backButton);
   gameSection.insertBefore(buttonDiv, gameSection.children[2]);
-  gameSection.insertBefore(winnerDisplay, gameSection.children[2]);
+  gameSection.insertBefore(displayMessage, gameSection.children[2]);
   gameSection.insertBefore(choicesDisplay, gameSection.children[2]);
 };
 
