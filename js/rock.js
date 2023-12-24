@@ -20,7 +20,7 @@ const backButton = document.createElement("button");
 backButton.innerText = "Main Menu";
 const scoreBoard = document.createElement("div");
 scoreBoard.id = "rock-scoreboard";
-const turnMessage = document.createElement("div");
+const displayMessage = document.createElement("div");
 
 // Main functions
 export const loadRock = () => {
@@ -77,11 +77,16 @@ const playRock = () => {
     <div>Computer Wins: ${computerWins}</div>
     <div>Ties: ${ties}</div>
   </div>`;
-  const turnMessage = document.createElement("div");
-  turnMessage.innerHTML = "It is now your turn.";
-  turnMessage.classList.add("turn-message");
+  displayMessage.innerHTML = "It is now your turn.";
+  displayMessage.classList.add("turn-message");
 
-  gameSection.append(gameTitle, scoreBoard, backButton, turnMessage, gameBoard);
+  gameSection.append(
+    gameTitle,
+    scoreBoard,
+    backButton,
+    displayMessage,
+    gameBoard
+  );
 
   // Add event listeners to player choices
   document
@@ -120,13 +125,13 @@ const playerChoose = (choice) => {
   document
     .getElementById("rock-player-choices")
     .appendChild(playerChoiceDisplay);
-  turnMessage.innerHTML = "";
   computerChoose();
   // Further logic for the game can be added here
 };
 
 const computerChoose = () => {
   setTimeout(() => {
+    displayMessage.innerHTML = "";
     // Start of the function to delay
     const choices = ["Rock", "Paper", "Scissors"];
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
@@ -176,9 +181,8 @@ const decideWinner = () => {
 const displayWinner = (message) => {
   setTimeout(() => {
     updateScoreboard();
-    const winnerDisplay = document.createElement("div");
-    winnerDisplay.innerHTML = message;
-    winnerDisplay.id = "winner-display";
+
+    displayMessage.innerHTML = message;
     const playAgainButton = document.createElement("button");
     playAgainButton.innerText = "Play Again";
     playAgainButton.addEventListener("click", playAgain);
@@ -187,7 +191,7 @@ const displayWinner = (message) => {
     buttonDiv.classList.add("button-container");
     buttonDiv.append(playAgainButton, backButton);
     gameSection.insertBefore(buttonDiv, gameSection.children[2]);
-    gameSection.insertBefore(winnerDisplay, gameSection.children[2]);
+    gameSection.insertBefore(displayMessage, gameSection.children[2]);
   }, 500);
 };
 
