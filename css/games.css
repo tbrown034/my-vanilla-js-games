@@ -6,24 +6,56 @@
   gap: 20px;
 }
 
-#tic-gameboard,
+#tic-gameboard {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  min-width: 300px;
+  flex-wrap: wrap;
+  background-color: #d9cab3; /* Muted vanilla for connect gameboard */
+}
+
+.cells {
+  height: 100px;
+  width: 100px;
+  box-sizing: border-box;
+  border: #333 solid 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+}
+
+.x-color {
+  color: #4b3f3f;
+}
+
+.o-color {
+  color: #ffffff; /* White text for better contrast */
+}
+
+.cell:hover {
+  background-color: #c5bbaf; /* Darker shade for hover */
+  cursor: pointer;
+}
+
 #rock-gameboard {
-  width: 50vw;
-  height: 50vh;
-  max-width: 600px;
-  max-height: 600px;
   background-color: #d9cab3; /* Muted vanilla for game-boards */
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 20px 0px;
+  border-radius: 20px;
 }
 
 .inactive-button {
   cursor: not-allowed;
 }
 
-.cells {
-  flex: 1 0 33%; /* Flex grow, shrink, and basis set to allocate around one-third of the board's space to each cell */
-  background-color: #d9cab3; /* Muted vanilla for cells */
+/* .cells {
+  flex: 1 0 33%;
+  background-color: #d9cab3;
   border: #333 solid 2px;
   box-sizing: border-box;
   display: flex;
@@ -31,19 +63,22 @@
   align-items: center;
   max-width: 200px;
   font-weight: bold;
-  color: #4b3f3f; /* Dark brown for text */
-}
+  color: #4b3f3f;
+} */
 
 .cells:hover {
   background-color: #c5bbaf; /* Darker shade for hover */
   cursor: pointer;
 }
 
-/* Rock Paper Scissors */
-#rock-player-choices,
-#rock-computer-choices,
 #head-player-choices,
-#head-computer-choices,
+#head-computer-choices {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rock Paper Scissors */
+
 #connect-gameboard,
 #winner-display,
 .connect-cell {
@@ -58,8 +93,8 @@
 }
 
 #connect-gameboard {
-  height: 300px;
-  width: 350px;
+  min-height: 300px;
+  min-width: 350px;
   flex-wrap: wrap;
   background-color: #d9cab3; /* Muted vanilla for connect gameboard */
 }
@@ -86,7 +121,10 @@
   background-color: #eab8b8; /* Strawberry cream red for computer occupied */
 }
 
-#connect-scoreboard {
+#connect-scoreboard,
+#head-scoreboard,
+#rock-scoreboard,
+#tic-scoreboard {
   background-color: #d9cab3;
   width: 80%;
   padding: 10px;

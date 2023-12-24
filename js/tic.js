@@ -110,6 +110,8 @@ const computerTurn = () => {
   if (emptyCells.length > 0) {
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     emptyCells[randomIndex].innerText = "O";
+    emptyCells[randomIndex].classList.add("o-color"); // Add class for O color
+
     playerTurn = true;
     checkWinner();
     indicateTurn();
@@ -143,6 +145,8 @@ const makeMove = (event) => {
   let selectedCell = event.target;
   if (playerTurn && selectedCell.innerText === "") {
     selectedCell.innerText = "X";
+    selectedCell.classList.add("x-color"); // Add class for X color
+
     playerTurn = false;
     const gameEnded = checkWinner(); // Check if the game has ended
     if (!gameEnded) {

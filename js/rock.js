@@ -43,7 +43,7 @@ export const loadRock = () => {
   playNow.innerText = "Play Now";
   playNow.addEventListener("click", playRock);
   buttonDiv.append(playNow, backButton);
-  gameSection.append(gameTitle, gameSubtitle, buttonDiv);
+  gameSection.append(gameTitle, gameSubtitle, buttonDiv, photoDiv);
 };
 
 const playRock = () => {
@@ -79,6 +79,7 @@ const playRock = () => {
   </div>`;
   const turnMessage = document.createElement("div");
   turnMessage.innerHTML = "It is now your turn.";
+  turnMessage.classList.add("turn-message");
 
   gameSection.append(gameTitle, scoreBoard, backButton, turnMessage, gameBoard);
 
